@@ -1,0 +1,198 @@
+\documentclass[12pt,a4paper]{amsart}
+\usepackage{geometry}
+\geometry{left = 30mm, right = 30mm}
+\addtolength{\textheight}{+25mm}
+\thispagestyle{empty}
+\usepackage{versions}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
+\else \excludeversion{solution} \fi
+\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
+\else \excludeversion{grading} \fi
+
+
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bo}{\mathbf{0}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+
+
+\newcommand{\st}{\ |\ }
+\newcommand{\Nul}{\mathrm{Null\,}}
+\newcommand{\Span}{\mathrm{Span}}
+
+\newcommand{\ve}[2]{\left[\begin{smallmatrix} #1 \\ #2 \end{smallmatrix}\right]}
+\renewcommand{\vec}[3]{\left[\begin{smallmatrix} #1 \\ #2 \\ #3 \end{smallmatrix}\right]}
+
+
+
+\begin{document}
+\begin{center}
+\begin{Large}
+{\bf Math 2135 - Assignment 2}
+\end{Large}
+
+\bigskip
+Due September 14, 2024
+\end{center}
+
+\thispagestyle{empty}
+
+\bigskip
+
+
+% Solve all systems of linear equations by row reduction (Gaussian elimination) and give the solutions in
+% parametric vector form.
+
+
+\begin{enumerate}
+
+\item
+ Is $\bb$ a linear combination of the vectors $\ba_1,\ba_2$?
+ \[ \ba_1 = \left[ \begin{array}{c} 1 \\ 2 \\ 1 
+\end{array} \right],
+\ba_2 = \left[ \begin{array}{c} -2 \\ -3 \\ 3 
+\end{array} \right],
+%\ba_3 = \left[ \begin{array}{c} -6 \\ 7 \\ 5 
+%\end{array} \right],
+\bb = \left[ \begin{array}{c} 1 \\ -2 \\ 3 
+\end{array} \right] \]
+
+\item
+ Is $\mathbf{b}\in \mathrm{Span}\{\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3\}$ for
+ \[ \mathbf{a}_1 = \left[ \begin{array}{c} 1 \\ 0 \\ 1 
+\end{array} \right],
+\mathbf{a}_2 = \left[ \begin{array}{c} -2 \\ 3 \\ -2 
+\end{array} \right],
+\mathbf{a}_3 = \left[ \begin{array}{c} -6 \\ 7 \\ 5 
+\end{array} \right],
+\mathbf{b} = \left[ \begin{array}{c} 11 \\ -5 \\ 9 
+\end{array} \right]? \]
+
+
+\item
+ For which values of $a$ is $\bb$ in the plane spanned by $\bv_1$ and $\bv_2$?
+ \[ \bv_1 = \left[ \begin{array}{c} 1 \\ 0 \\ -2 
+\end{array} \right],
+\bv_2 = \left[ \begin{array}{c} -2 \\ 1 \\ 7 
+\end{array} \right],
+\bb = \left[ \begin{array}{c} a \\ -3 \\ -5 
+\end{array} \right] \]
+
+
+
+\item
+%\begin{enumerate}
+%\item
+ Find vectors $\bv_1,\dots,\bv_k\in\R^3$ that span the plane in $\R^3$ with equation $x-2y+3z = 0$.
+ How many do you need?
+
+ Hint: Write down a parametrized solution for the equation. 
+
+
+\item
+ Are the following true or false? Explain your answers.
+\begin{enumerate}
+\item
+ For every $A\in\R^{2\times 3}$ with $2$ pivots, $Ax=0$ has a nontrivial solution.
+  
+\item
+ For every $A\in\R^{2\times 3}$ with $2$ pivots and every $\bb\in\R^2$, $Ax=\bb$ is consistent.
+
+\item
+ The vector $3\bv_1$ is a linear combination of the vectors $\bv_1,\bv_2$.
+
+\item
+ For $\bv_1,\bv_2\in\mathbb{R}^3$, Span$(\bv_1,\bv_2)$ is always a plane 
+ through the origin.
+\end{enumerate}
+
+
+
+\item \cite[cf. Section 1.5, Ex 17]{La-LA}
+Let 
+\[ 
+A=\left[\begin{matrix} 2 & 2 & 4 \\ -4 & -4 & -8 \\ 0 & -3 & -3 
+\end{matrix}\right], \quad 
+\bb=\left[\begin{matrix} 8 \\ -16 \\ 12 \end{matrix}\right], \quad
+\mathbf{0}=\left[\begin{matrix} 0 \\ 0 \\ 0 \end{matrix}\right]. 
+\]
+Solve the equations $A\bx=\bb$ and  $A\bx=\mathbf{0}$. Express both solution sets in parametric vector form.
+Give a geometric description of the solution sets.
+
+\item\label{mat12}
+\begin{enumerate}
+\item Which of the vectors $\bu,\bv,\bw$ are in the nullspace of $A$, $\Nul A$?
+\[ 
+\bu = \left[\begin{matrix} 0 \\ 0 \\ 0 \\ 0 \end{matrix}\right], \quad
+\bv = \left[\begin{matrix} -2 \\ 0 \\ 4 \\ -2 \end{matrix}\right], \quad
+\bw = \left[\begin{matrix} 1 \\ 1 \\ -2 \\ 1 \end{matrix}\right], \quad
+A = \left[ \begin{matrix}
+ 0 & 0 & 2 & 4 \\
+ 2 & -4 & 1 & 0 \\
+ -3 & 6 & 2 & 7
+ \end{matrix} \right] \]
+
+\item  Solve $A\bx=\bo$ and give the solution in parametric vector form.
+
+\item  Find vectors $v_1,\dots,v_k \in \R^4$ such that $\Nul A = \Span\{ v_1,\dots,v_k \}$.
+\end{enumerate}
+
+
+
+
+\item
+Show the following:
+
+\bigskip
+
+\noindent {\bf Theorem.} Suppose $A\bx=\bb$ has a solution $\mathbf{p}$. Then the set of all solutions of $A\bx=\bb$ is
+\[ \mathbf{p}+\Nul A = \{\mathbf{p}+\mathbf{v}\ |\ \mathbf{v} \in \Nul A\}. \]
+
+\bigskip
+
+\noindent Hint: For the proof suppose $A\bx=\bb$ has a solution $\bp$ and use 2 steps:
+\begin{enumerate}
+\item Show that if $\bv$ is in $\Nul A$, then $\bp+\bv$ is also a solution for $A\bx=\bb$.
+\item Show that if $\bq$ is a solution for $A\bx=\bb$, then $\mathbf{q}-\bp$ is in $\Nul A$.
+\end{enumerate}
+ 
+\end{enumerate}
+
+
+
+
+\begin{thebibliography}{1}
+\bibitem{La-LA}
+ David C. Lay, Steven R. Lay, and Judi J. McDonald.
+\newblock Linear Algebra and Its Applications.
+\newblock Addison-Wesley, 5th edition, 2015.
+\end{thebibliography}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
