@@ -1,17 +1,17 @@
-\documentclass[12pt,a4paper]{amsart}
-\usepackage{geometry}
-\geometry{left = 30mm, right = 30mm}
+\documentclass[12pt,a4paper]{exam}
+%\usepackage{geometry}
+%\geometry{left = 30mm, right = 30mm}
 \addtolength{\textheight}{+25mm}
 \thispagestyle{empty}
 \usepackage{versions}
-\newif\ifsol\solfalse
+%\newif\ifsol\solfalse
 
 %\soltrue % comment to hide solution
 
-\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
-\else \excludeversion{solution} \fi
-\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
-\else \excludeversion{grading} \fi
+%\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
+%\else \excludeversion{solution} \fi
+%\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
+%\else \excludeversion{grading} \fi
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -45,7 +45,6 @@
 \begin{center}
 \begin{Large}
 {\bf Math 2135 - Assignment 2}
-\printanswers
 \end{Large}
 
 \bigskip
@@ -57,6 +56,10 @@ Due September 14, 2024
 \bigskip
 
 
+
+
+\printanswers
+\renewcommand{\solutiontitle}{\noindent\textbf{Ans:}\enspace}
 % Solve all systems of linear equations by row reduction (Gaussian elimination) and give the solutions in
 % parametric vector form.
 
@@ -75,7 +78,21 @@ Due September 14, 2024
 \end{array} \right] \]
 
 \begin{solution}
-  HI
+  \begin{itemize}
+    \item Create matrix to represent system:\\
+      \[
+      \left[ \begin{array}{ccc}
+          1 & -2 & 1 \\ 2 & -3 & -2 \\ 1 & 3 & 3
+      \end{array} \right]
+      \]
+    \item Row reduce:\\
+      \[
+      \left[ \begin{array}{ccc}
+          1 & -2 & 1 \\ 0 & 1 & -4 \\ 0 & 0 & 22
+      \end{array} \right]
+      \]
+    \item $\bb$ is not a linear combination of the vectors because the the system represented by the augmented matrix is inconsistent.
+  \end{itemize}
 \end{solution}
 
 
@@ -92,6 +109,25 @@ Due September 14, 2024
 \mathbf{b} = \left[ \begin{array}{c} 11 \\ -5 \\ 9 
 \end{array} \right]? \]
 
+\begin{solution}
+  \begin{itemize}
+    \item Create matrix to represent system:\\
+      \[
+      \left[ \begin{array}{cccc}
+          1 & -2 & -6 & 11 \\ 0 & 3 & 7 & -5 \\ 1 & -2 & 5 & 9
+      \end{array} \right]
+      \]
+    \item Row reduce:\\
+      \[
+      \left[ \begin{array}{cccc}
+          1 & -2 & -6 & 11 \\ 0 & 3 & 7 & -5 \\ 0 & 0 & 11 & -2
+      \end{array} \right]
+      \]
+    \item $\bb$ is a linear combination of the vectors because the the system represented by the augmented matrix is consistent.
+  \end{itemize}
+\end{solution}
+
+
 
 \item
  For which values of $a$ is $\bb$ in the plane spanned by $\bv_1$ and $\bv_2$?
@@ -103,6 +139,28 @@ Due September 14, 2024
 \end{array} \right] \]
 
 
+\begin{solution}
+  \begin{itemize}
+    \item Create matrix to represent system:\\
+      \[
+      \left[ \begin{array}{ccc}
+          1 & -2 & a \\ 0 & 1 & -3 \\ -2 & 7 & -5
+      \end{array} \right]
+      \]
+    \item Row reduce:\\
+      \[
+      \left[ \begin{array}{ccc}
+        1 & -2 & a \\ 0 & 1 & -3 \\ 0 & 0 & 4+2a
+      \end{array} \right]
+      \]
+    \item The system must be consistent for $\bb$ to be in the plane.
+          The last row represents the equation $0=4+2a$, so if we solve this, we find the value of $a$ that allows the system to be consistent.
+          When the equation is solved we get $a=-2$ as the solution.
+  \end{itemize}
+\end{solution}
+
+
+
 
 \item
 %\begin{enumerate}
@@ -111,6 +169,15 @@ Due September 14, 2024
  How many do you need?
 
  Hint: Write down a parametrized solution for the equation. 
+
+\begin{solution}
+  \begin{itemize}
+    \item We can see from the equation that the plane goes through $(0,0,0)$. We can choose two arbitrary non-colinear points and the vectors to those points will span the plane.
+    \item Setting $x=0$ and $y=3$, we get $z=2$ and the point $(0,3,2)$. Setting $y=0$ and $x=3$ we get $z=-1$ and the point $(3,0,-1)$.
+    \item The vectors from the origin to these point are $ \left[ \begin{array}{c} 0 \\ 3 \\ 2 \end{array} \right]$ and $\left[ \begin{array}{c} 3 \\ 0 \\ -1 \end{array} \right]$.
+    \item Since these vectors both lie on the plane and are not colinear, they span the plane.
+  \end{itemize}
+\end{solution}
 
 
 \item
@@ -131,6 +198,15 @@ Due September 14, 2024
 \end{enumerate}
 
 
+\begin{solution}
+  \begin{enumerate}
+    \item
+    \item
+    \item True, $3\bv_1+0\bv_2=3\bv_1$
+    \item False, if the vectors are colinear then their span will only be a line.
+  \end{enumerate}
+\end{solution}
+
 
 \item \cite[cf. Section 1.5, Ex 17]{La-LA}
 Let 
@@ -142,6 +218,41 @@ A=\left[\begin{matrix} 2 & 2 & 4 \\ -4 & -4 & -8 \\ 0 & -3 & -3
 \]
 Solve the equations $A\bx=\bb$ and  $A\bx=\mathbf{0}$. Express both solution sets in parametric vector form.
 Give a geometric description of the solution sets.
+
+\begin{solution}
+  \begin{itemize}
+    \item Augmented Matrix:\\
+      \[
+        \left[\begin{array}{cccc} 2 & 2 & 4 & 8 \\ -4 & -4 & -8 & -16 \\ 0 & -3 & -3 & 12
+        \end{array}\right]
+      \]
+    \item Row reduce:\\
+      \[
+        \left[\begin{array}{cccc} 1 & -1 & 0 & 12 \\ 0 & 1 & 1 & -4 \\ 0 & 0 & 0 & 0
+        \end{array}\right]
+      \]
+  \end{itemize}
+  \begin{enumerate}
+    \item Solve for $Ax=b$:\\
+      Equation 2: $x_2=-x_3-4$ 
+      Equation 1: $x_1=12+x_2=8-x_3$
+      if we set $t=x_3$ we get the following parametric equation: 
+      $x=\left[\begin{array}{c} 8 \\ -4 \\ 0 \end{array}\right] + t\left[\begin{array}{c} -1 \\ -1 \\ 1 \end{array}\right]$\\
+      The system of equations represents a line that is the intersection of 2 planes. The line goes through the point $(8,-4,0)$.
+    \item Solve for $Ax=0$;\\
+      The row reduced array is the same exept the rightmost column is all zeroes.\\
+      Equation 2: $x_2=-x_3$ 
+      Equation 1: $x_1=x_2=-x_3$
+
+
+      if we set $t=x_3$ we get the following parametric equation: 
+      $x=t\left[\begin{array}{c} -1 \\ -1 \\ 1 \end{array}\right]$\\
+      The system of equations represents a line that is the intersection of 2 planes. The line goes through the origin.
+
+  \end{enumerate}
+\end{solution}
+
+
 
 \item\label{mat12}
 \begin{enumerate}
@@ -162,6 +273,59 @@ A = \left[ \begin{matrix}
 \end{enumerate}
 
 
+\begin{solution}
+  \begin{enumerate}
+    \item
+      \begin{enumerate}
+        \item \[ \left[\begin{matrix} 0 \\ 0 \\ 0 \\ 0 \end{matrix}\right] \] is in the nullspace because it is clear that if we multiply $A$ by all zeroes we will get the zero vector.
+        \item \[ \left[\begin{matrix} -2 \\ 0 \\ 4 \\ -2 \end{matrix}\right] \cdot \left[\begin{matrix}
+          0 & 0 & 2 & 4 \\
+          2 & -4 & 1 & 0 \\
+          -3 & 6 & 2 & 7
+          \end{matrix}\right]
+          =
+          \left[\begin{matrix} 0+0+8-8 \\ -4+0+4+0 \\ 6+0+8-14 \end{matrix}\right]
+          =
+          \left[\begin{matrix} 0 \\ 0 \\ 0 \end{matrix}\right]
+          \] so the vector is in the nullspace of $A$.
+        \item \[ \left[\begin{matrix} 1 \\ 1 \\ -2 \\ 1 \end{matrix}\right] \cdot \left[\begin{matrix}
+          0 & 0 & 2 & 4 \\
+          2 & -4 & 1 & 0 \\
+          -3 & 6 & 2 & 7
+          \end{matrix}\right]
+          =
+          \left[\begin{matrix} 0+0-4+4 \\ 2-4-2+0 \\ -3+6-4+7 \end{matrix}\right]
+          =
+          \left[\begin{matrix} 0 \\ -4 \\ 6 \end{matrix}\right]
+          \] so the vector is not in the nullspace of $A$.
+      \end{enumerate}
+    \item
+    \begin{itemize}
+      \item Augmented matrix:\\
+        \[ \left[ \begin{matrix}
+            0 & 0 & 2 & 4 & 0\\
+            2 & -4 & 1 & 0 & 0\\
+            -3 & 6 & 2 & 7 & 0
+         \end{matrix} \right] \]
+      \item Row reduce:\\
+        \[ \left[ \begin{matrix}
+            1 & -2 & 0 & -1 & 0\\
+            0 & 0 & 1 & 2 & 0\\
+            0 & 0 & 0 & 0 & 0
+         \end{matrix} \right] \]
+      \item Equations:\\
+        Equation 2: $x_3=-2x_4$. 
+        Equation 1: $x_1=2x_2+x_4$. 
+        $x_2$ and $x_4$ are both free so we set $t=x_2$ and $u=x_4$.
+      \item Parametric equation:\\
+        $x=t\left[\begin{array}{c} 2 \\ 1 \\ 0 \\ 0 \end{array}\right] + u\left[\begin{array}{c} 1 \\ 0 \\ -2 \\ 1 \end{array}\right]$\\
+    \end{itemize}
+    \item The span of a system is just the set of vectors for which all possible linear combination of them is
+          equivilant to the system's solutions. Therefore we can just use the vector from the previous question,
+          so $\Nul A = \Span \{\left[\begin{array}{c} 2 \\ 1 \\ 0 \\ 0 \end{array}\right], \left[\begin{array}{c} 1 \\ 0 \\ -2 \\ 1 \end{array}\right]\}$
+  \end{enumerate}
+\end{solution}
+
 
 
 \item
@@ -179,7 +343,12 @@ Show the following:
 \item Show that if $\bv$ is in $\Nul A$, then $\bp+\bv$ is also a solution for $A\bx=\bb$.
 \item Show that if $\bq$ is a solution for $A\bx=\bb$, then $\mathbf{q}-\bp$ is in $\Nul A$.
 \end{enumerate}
- 
+\begin{solution}
+  \begin{itemize}
+    \item First, suppose that $A\bx=b$ has some solution $\bx=\bp$.
+    \item If we then take any $\bv\in\Nul A$ 
+  \end{itemize}
+\end{solution}
 \end{enumerate}
 
 
