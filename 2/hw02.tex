@@ -48,7 +48,8 @@
 \end{Large}
 
 \bigskip
-Due September 14, 2024
+Due September 14, 2024\\
+Completed by Maxwell Rodgers on September 12, 2024
 \end{center}
 
 \thispagestyle{empty}
@@ -200,8 +201,10 @@ Due September 14, 2024
 
 \begin{solution}
   \begin{enumerate}
-    \item
-    \item
+    \item False, A in reduced echelon form will always be the same, and so the augmented matrix that represents this system will also always be the same. This matrix is $$\left[\begin{matrix}1&0&0\\0&1&0\\0&0&0 \end{matrix}\right]$$
+          Which has the only solution $\left[\begin{matrix} 0\\0 \end{matrix}\right]$, which is the trivial solution.
+    \item True, this will always produce an augmented matrix in row echelon form that looks like this: $$\left[\begin{matrix}1&0&a\\0&1&b\\0&0&0 \end{matrix}\right], a,b\in\R$$
+          The last row is all zeroes because $\bb\in\R^2$ not $\R^3$,\. This will always have the solution $\left[\begin{matrix} a\\b \end{matrix}\right]$.
     \item True, $3\bv_1+0\bv_2=3\bv_1$
     \item False, if the vectors are colinear then their span will only be a line.
   \end{enumerate}
@@ -345,8 +348,15 @@ Show the following:
 \end{enumerate}
 \begin{solution}
   \begin{itemize}
-    \item First, suppose that $A\bx=b$ has some solution $\bx=\bp$.
-    \item If we then take any $\bv\in\Nul A$ 
+    \item First, suppose that $A\bx=\bb$ has some solution $\bx=\bp$.
+    \item If we then take any $\bv\in\Nul A$, by definition $A\bv=0$. Thus, if we take $A\cdot(\bp+\bv)$,
+          we get $A\bv+A\bp=0+\bb=\bb$. 
+    \item This means that every vector that can be represented in the form $\bp+\bv$ is a solution for $A\bx=\bb$.
+    \item If we then take $\bq-\bp$ s.t. $\bq$ is a solution of $A\bx=\bb$, we see that $A\cdot(\bq-\bp)=
+          A\bq+A(-\bp)=\bb-\bb=0$.
+    \item This means that every vector that can be represented in the form $\bq-\bp$ is in $\Nul A$.
+    \item Together, these two facts show us that $\bp+\bv=\bq$ , which means that the sum of an arbitrary solution of $A$ and an arbitrary member of $\Nul A$ generate another solution of $A$.
+    \item This means that if we take $\Nul A$, then $\bp+\Nul A = \mathbf{Q}$ where $\mathbf{Q}$ is the set of all solutions of $A\bx=\bb$.
   \end{itemize}
 \end{solution}
 \end{enumerate}

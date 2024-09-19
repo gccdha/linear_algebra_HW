@@ -1,0 +1,219 @@
+\documentclass[12pt]{amsart}
+\thispagestyle{empty}
+\usepackage{lmodern}
+\usepackage[
+scale=0.75,
+margin=1in,
+]{geometry}
+\usepackage{versions}
+\usepackage{mdframed}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bo}{\mathbf{0}}
+%\newcommand{\bp}{\mathbf{p}}
+%\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{u}
+\newcommand{\bv}{\mathbf v}
+\newcommand{\bw}{w}
+\newcommand{\bx}{x}
+\newcommand{\by}{y}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand\sol[1]{
+\medskip
+\begin{mdframed}
+\emph{Ans:\\} #1
+\end{mdframed}
+\medskip
+}
+
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+
+
+\newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
+\newcommand{\vd}[3]{\left[\begin{matrix} #1 \\ #2 \\ #3 \end{matrix}\right]}
+
+
+
+\begin{document}
+\begin{center}
+{\Large\textbf{Math 2135 - Assignment 3}}\\
+\medskip
+Due September 20, 2024 \\
+Completed September 19, 2024, Maxwell Rodgers
+\end{center}
+\medskip
+\thispagestyle{empty}
+
+\begin{enumerate}
+
+\item
+  Which of the following sets of vectors are linearly independent?
+  
+%\begin{enumerate}
+%\item
+  (a) $\vd{0}{-1}{4},\vd{2}{1}{3},\vd{1}{0}{-2}$   \hspace{2cm}
+%\item
+  (b) $\vd{1}{-3}{2},\vd{2}{1}{3},\vd{-1}{-11}{0}$
+
+
+  \sol{
+    \begin{enumerate}
+      \item
+        \begin{itemize}
+          \item Create Matrix:\\
+            $$\left[\begin{matrix} 0 & 2 & 1 \\ -1 & 1 & 0 \\ 4 & 3 & -2 \end{matrix}\right]$$
+          \item Row Reduce:\\
+            $$\left[\begin{matrix} -1 & 1 & 0 \\ 0 & 2 & 1 \\ 0 & 0 & -\frac{11}{2} \end{matrix}\right]$$
+            These Vectors are linearly independant because the row reduction of them in matrix form leads to a pivot in every column and every row (this means they only have the trivial solution to $Ax=\bo$)
+        \end{itemize}
+      \item
+        \begin{itemize}
+          \item Create Matrix:\\
+            $$\left[\begin{matrix} 1 & 2 & -1 \\ -3 & 1 & 11 \\ 2 & 3 & 0 \end{matrix}\right]$$
+          \item Row Reduce:\\
+            $$\left[\begin{matrix} 1 & 2 & -1 \\ 0 & 1 & -2 \\ 0 & 0 & 0 \end{matrix}\right]$$
+            These vectors are linearly dependant because the row reduction of the matrix with them as columns leads to a system with non trivial solutions to $Ax=\bo$ (because one of the rows is all zeroes.
+        \end{itemize}
+  \end{enumerate}
+  }
+
+
+
+
+
+
+\item Explain whether the following are true or false: %(give counter examples if possible):
+\begin{enumerate}
+\item   
+ Vectors $\bv_1,\bv_2, v_3$ are linearly dependent if $\bv_2$ is a linear combination of $\bv_1,\bv_3$.
+\item
+ A subset $\{ \bv \}$ containing just a single vector is linearly dependent iff $\bv=\bo$.
+\item
+ Two vectors are linearly dependent iff they lie on a line through the origin.  
+%\item
+% Two vectors in $\R^3$ cannot span all of $\R^3$.
+\item
+ There exist four vectors in $\R^3$ that are linearly independent.
+\end{enumerate}
+
+
+\sol{
+  \begin{enumerate}
+    \item \textbf{True}: If $\bv_2$ is a linear combination of two other vectors, then there will be at least one non-trivial solution to $Ax=\bo$. We can see this because $n\bv_1+m\bv_3=\bv_2, m,n\in\R$ (since $\bv_2$ is a linear combination of the other two) which implies $n\bv_1+m\bv_3-\bv_2=0$.
+    \item \textbf{True}: There is no non-trivial solution for one non-zero vector, and $Ax=\bo$ is certainly true for x being any non-trivial multiple of the zero vector.
+    \item \textbf{True}: If the vector lie on the same line, they are going to be multiples of each other such that $n\bv_1=\bv_2$, which means that each is a linear combination of the other.
+    \item \textbf{False}: If we row reduce the matrix formed by these 4 vectors, there will always be a column without a pivot, which means that there will always be at least one free variable in $Ax=\bo$. This means there is a non-trivial solution and the vectors must be linearly dependant.
+  \end{enumerate}
+}
+
+
+\item Show: If any of the vectors $\bv_1,\dots,\bv_n$ is the zero vector (say $\bv_i=\bo$ for $i\leq n$), then
+ $\bv_1,\dots,\bv_n$ are linearly dependent.
+
+ \sol{
+  Say we have sove vector $\bv_i=\bo$ and some other vector $\bv_j\ne\bo$. Since $0\bv_j=\bo=\bv_i$, $\bv_i$ is a linear combination of the other vectors and thus the set of vectors is linearly dependant.
+ }
+
+\item Show: If $n>m$, then any $n$ vectors $\ba_1,\dots,\ba_n\in\R^m$ are linearly dependent. %TODO
+
+
+% \item
+%  Let $\bv_1,\dots,\bv_n$ be linearly independent in $\R^m$. Show that no vector in $\Span\{\bv_1,\dots,\bv_n\}$
+%  can be expressed by two different linear combinations.
+
+% \smallskip 
+% \noindent Hint: Use contraposition. Assume some vector $u\in\R^m$ can be written as linear combination with distinct lists
+%  of coefficients $a_1,\dots,a_n$ and $b_1,\dots,b_n$. Show that then $\bv_1,\dots,\bv_n$ is linearly dependent. 
+
+
+\item
+ Show that the following maps are not linear by giving concrete vectors for which the defining properties
+ of linear maps are not satisfied.
+\begin{enumerate}
+\item
+ $f: \R^2\to\R^2, \left[\begin{matrix} x \\ y \end{matrix}\right] \mapsto \left[\begin{matrix} x+1 \\ y+3 \end{matrix}\right]$
+\item 
+ $g: \R^2\to\R^2, \left[\begin{matrix} x \\ y \end{matrix}\right] \mapsto \left[\begin{matrix} xy \\ y \end{matrix}\right]$
+\item 
+ $h: \R^2\to\R^2, \left[\begin{matrix} x \\ y \end{matrix}\right] \mapsto \left[\begin{matrix} |x|+|y| \\ 2x \end{matrix}\right]$
+\end{enumerate}
+
+\sol{
+  Transformation $T:\R^n\to\R^m$ $n,m \in \R$ is linear if:\\
+  \begin{enumerate}
+    \item[1: ]$T(v_1)+T(v_2)=T(v_1+v_2)$ $v_1,v_2\in\R^n$
+    \item[2: ]$cT(v_3)=T(cv_3)$ $v_3\in\R^n$, $c\in\R$
+  \end{enumerate}
+  \begin{enumerate}
+    \item $v_1=\left[\begin{matrix} 1 \\ 1\end{matrix}\right],v_2=\left[\begin{matrix} 2 \\ 2\end{matrix}\right],c=2$\\
+          $T(v_1)=\left[\begin{matrix} 2 \\ 4 \end{matrix}\right],T(v_2)=\left[\begin{matrix} 3 \\ 5\end{matrix}\right]$\\
+          $T(v_1)+T(v_2)=\left[\begin{matrix} 5 \\ 9\end{matrix}\right]\ne T(v_1+v_2)=\left[\begin{matrix} 4 \\ 6\end{matrix}\right]$ (violates 1)\\
+          $cT(v_1)=\left[\begin{matrix} 4 \\ 8\end{matrix}\right]\ne T(cv_1)=\left[\begin{matrix} 3 \\ 5\end{matrix}\right]$ (violates 2)
+
+    \item $v_1=\left[\begin{matrix} 1 \\ 1\end{matrix}\right],v_2=\left[\begin{matrix} 2 \\ 2\end{matrix}\right],c=2$\\
+          $T(v_1)=\left[\begin{matrix} 1 \\ 1 \end{matrix}\right],T(v_2)=\left[\begin{matrix} 4 \\ 2\end{matrix}\right]$\\
+          $T(v_1)+T(v_2)=\left[\begin{matrix} 5 \\ 3\end{matrix}\right]\ne T(v_1+v_2)=\left[\begin{matrix} 9 \\ 3\end{matrix}\right]$ (violates 1)\\
+          $cT(v_1)=\left[\begin{matrix} 2 \\ 2\end{matrix}\right]\ne T(cv_1)=\left[\begin{matrix} 4 \\ 2\end{matrix}\right]$ (violates 2)
+
+    \item $v_1=\left[\begin{matrix} 1 \\ 1\end{matrix}\right],v_2=\left[\begin{matrix} -1 \\ -1\end{matrix}\right],c=-1$\\
+          $T(v_1)=\left[\begin{matrix} 2 \\ 2 \end{matrix}\right],T(v_2)=\left[\begin{matrix} 2 \\ -2\end{matrix}\right]$\\
+          $T(v_1)+T(v_2)=\left[\begin{matrix} 4 \\ 0\end{matrix}\right]\ne T(v_1+v_2)=\left[\begin{matrix} 0 \\ 0 \end{matrix}\right]$ (violates 1)\\
+          $cT(v_1)=\left[\begin{matrix} -2 \\ -2\end{matrix}\right]\ne T(cv_1)=\left[\begin{matrix} 2 \\ -2 \end{matrix}\right]$ (violates 2)
+
+  \end{enumerate}
+}
+
+\item
+ Let $T\colon\R^3\to\R^3$ be a linear map such that 
+\[ T(\left[\begin{matrix} 1 \\ 0 \\ 0 \end{matrix}\right]) = \left[\begin{matrix} -1 \\ 2 \\ 0 \end{matrix}\right],\ T(\left[\begin{matrix} 0 \\ 1 \\ 0 \end{matrix}\right]) = \left[\begin{matrix} -3 \\ 0 \\ 1 \end{matrix}\right]. \]
+%\begin{enumerate}
+  Use the linearity of $T$ to compute $T(\left[\begin{matrix} 2 \\ 3 \\ 0 \end{matrix}\right])$ and
+ $T(\left[\begin{matrix} 1 \\ 2 \\ 3 \end{matrix}\right])$.
+ What is the issue with the latter?
+
+
+\item
+ Let $T\colon\R^2\to\R^3$ be a linear map such that 
+\[ T(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]) = \left[\begin{matrix} 2 \\ 0 \\ -3 \end{matrix}\right],\ T(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right]) = \left[\begin{matrix} -2 \\ 2 \\ 1 \end{matrix}\right]. \]
+\begin{enumerate}
+\item
+ Use the linearity of $T$ to find $T(\left[\begin{matrix} 1 \\ 0 \end{matrix}\right])$ and $T(\left[\begin{matrix} 0 \\ 1 \end{matrix}\right])$.
+\item
+ Determine $T(\left[\begin{matrix} x \\ y \end{matrix}\right])$ for arbitrary $x,y\in\R$.
+\end{enumerate}
+
+
+
+\item
+ Give the standard matrices for the following linear transformations:
+\begin{enumerate}
+\item $T:\R^2\to\R^3, \left[\begin{matrix} x \\ y \end{matrix}\right]\mapsto \left[\begin{matrix} 2x+y \\ x \\ -x+y \end{matrix}\right]$;
+\item the function $S$ on $\R^2$ that scales all vectors to half their length.
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
