@@ -120,11 +120,24 @@ Completed September 19, 2024, Maxwell Rodgers
  $\bv_1,\dots,\bv_n$ are linearly dependent.
 
  \sol{
-  Say we have sove vector $\bv_i=\bo$ and some other vector $\bv_j\ne\bo$. Since $0\bv_j=\bo=\bv_i$, $\bv_i$ is a linear combination of the other vectors and thus the set of vectors is linearly dependant.
+  Say we have some vector $\bv_i=\bo$ and some other vector $\bv_j\ne\bo$. Since $0\bv_j=\bo=\bv_i$, $\bv_i$ is a linear combination of the other vectors and thus the set of vectors is linearly dependant.
  }
 
-\item Show: If $n>m$, then any $n$ vectors $\ba_1,\dots,\ba_n\in\R^m$ are linearly dependent. %TODO
+\item Show: If $n>m$, then any $n$ vectors $\ba_1,\dots,\ba_n\in\R^m$ are linearly dependent. 
 
+\sol{
+  \begin{itemize}
+    \item We start by taking the matrix that has $\ba_1,\dots,\ba_n$ as columns:\\
+      $\left[\begin{matrix} \ba_{1,1} & \cdots & \ba_{n,1} \\ \vdots & \ddots & \vdots \\ \ba_{1,m} & \cdots & \ba_{n,m} \end{matrix}\right]$
+    \item We then row reduce it into reduced row echelon form:\\
+      $\left[\begin{matrix} 1 & 0 & \cdots & 0 & \cdots & \ba_{n,1}' \\ 
+                            0 & 1 & \cdots & 0 & \cdots & \ba_{n,2}' \\
+                            \vdots & \vdots & \ddots & \vdots & \ddots & \vdots\\
+                            0 & 0 & \cdots & 1 & \cdots & \ba_{n,m}'
+                            \end{matrix}\right]$
+    \item We can see that there will always be at least one free variable (unless a vector is a zero vector, but that is covered by the previous question). This free variable means that there will be infinite solutions to $Ax=\bo$, meaning the vectors are linearly dependant.
+  \end{itemize}
+}
 
 % \item
 %  Let $\bv_1,\dots,\bv_n$ be linearly independent in $\R^m$. Show that no vector in $\Span\{\bv_1,\dots,\bv_n\}$
@@ -181,6 +194,17 @@ Completed September 19, 2024, Maxwell Rodgers
  What is the issue with the latter?
 
 
+\sol{
+  \begin{itemize}
+    \item Vector 1:\\
+      $T(\left[\begin{matrix} 2 \\ 3 \\ 0 \end{matrix}\right])=2T(\left[\begin{matrix} 1 \\ 0 \\ 0 \end{matrix}\right])+3T(\left[\begin{matrix} 0 \\ 1 \\ 0 \end{matrix}\right])=\left[\begin{matrix} -2 \\ 4 \\ 0 \end{matrix}\right]+\left[\begin{matrix} -9 \\ 0 \\ 3 \end{matrix}\right]=\left[\begin{matrix} -11 \\ 4 \\ 3 \end{matrix}\right]$
+    \item Vector 2:\\
+      The problem with the second vector is that it is not a linear combination of the two unit vectors that we have the value of $T$ for, so we cannot find it.
+  \end{itemize}
+}
+
+
+
 \item
  Let $T\colon\R^2\to\R^3$ be a linear map such that 
 \[ T(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]) = \left[\begin{matrix} 2 \\ 0 \\ -3 \end{matrix}\right],\ T(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right]) = \left[\begin{matrix} -2 \\ 2 \\ 1 \end{matrix}\right]. \]
@@ -192,6 +216,22 @@ Completed September 19, 2024, Maxwell Rodgers
 \end{enumerate}
 
 
+\sol{
+  \begin{enumerate}
+    \item
+    \begin{itemize}
+      \item $\frac{1}{2}(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right]-\left[\begin{matrix} 1 \\ 2 \end{matrix}\right])=\left[\begin{matrix} 1 \\ 0 \end{matrix}\right]$\\
+            $\frac{1}{2}(T(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right])-T(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]))=T(\left[\begin{matrix} 1 \\ 0 \end{matrix}\right])$\\
+            $\frac{1}{2}(\left[\begin{matrix} -2 \\ 2 \\ 1 \end{matrix}\right]+\left[\begin{matrix} -2 \\ 0 \\ 3 \end{matrix}\right])=T(\left[\begin{matrix} 1 \\ 0 \end{matrix}\right])=\left[\begin{matrix} -2 \\ 1 \\ 2 \end{matrix}\right]$\\
+      \item $-\frac{1}{4}(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right]-3\left[\begin{matrix} 1 \\ 2 \end{matrix}\right])=\left[\begin{matrix} 0 \\ 1 \end{matrix}\right]$\\
+            $-\frac{1}{4}(T(\left[\begin{matrix} 3 \\ 2 \end{matrix}\right])-3T(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]))=T(\left[\begin{matrix} 0 \\ 1 \end{matrix}\right])$\\
+            $-\frac{1}{4}(\left[\begin{matrix} -2 \\ 2 \\ 1 \end{matrix}\right]+\left[\begin{matrix} -6 \\ 0 \\ 9 \end{matrix}\right])=T(\left[\begin{matrix} 0 \\ 1 \end{matrix}\right])=\left[\begin{matrix} 2 \\ -\frac{1}{2} \\ -\frac{5}{2} \end{matrix}\right]$\\
+    \end{itemize}
+      \item
+        $T(\left[\begin{matrix} x \\ y \end{matrix}\right])=\left[\begin{matrix} 2y-2x \\ -\frac{y}{2}+x \\ -\frac{5y}{2}+2x \end{matrix}\right]$
+  \end{enumerate}
+}
+
 
 \item
  Give the standard matrices for the following linear transformations:
@@ -199,7 +239,18 @@ Completed September 19, 2024, Maxwell Rodgers
 \item $T:\R^2\to\R^3, \left[\begin{matrix} x \\ y \end{matrix}\right]\mapsto \left[\begin{matrix} 2x+y \\ x \\ -x+y \end{matrix}\right]$;
 \item the function $S$ on $\R^2$ that scales all vectors to half their length.
 
+
 \end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      $\left[\begin{matrix} 2 & 1 \\ 1 & 0 \\ -1 & -1\end{matrix}\right]$ (from the coefficients of x and y, x in left column y in right.)
+    \item
+    $\left[\begin{matrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{2}\end{matrix}\right]$ x is multiplied by 1/2 and put in the top, y is also multiplied by 1/2 in the bottom this gives the whole vector multiplied by the scalar 1/2
+  \end{enumerate}
+}
+
 
 \end{enumerate}
 \end{document}
