@@ -54,8 +54,10 @@ margin=1in,
 {\Large\textbf{Math 2135 - Assignment 5}}\\
 \medskip
 Due October 4, 2024 \\
-\end{center}
 \smallskip
+Maxwell Rodgers, Completed October 2, 2024
+\smallskip
+\end{center}
 \thispagestyle{empty}
 
 
@@ -102,9 +104,9 @@ Due October 4, 2024 \\
  What is the standard matrix of $T$?
 
 \sol{
-  $T(\vt{3}{4}-2T(\vt{1}{2})=T(\vt{1}{0})=\vd{0}{1}{-2}-\vd{4}{-2}{2}=\vd{-4}{-1}{-4}$\\
-  $\frac{1}{2}(T(\vt{1}{2}-T(\vt{1}{0}))=T(\vt{0}{1})=\frac{1}{2}(\vd{2}{-1}{1}-\vd{-4}{-1}{-4})=\vd{3}{0}{\frac{5}{2}}$\\
-  so the standard matrix is $\left[\begin{matrix} -4 & 3 \\ -1 & 0 \\ -4 & \frac{5}{2} \end{matrix}\right]$
+  $T(\vt{3}{4})-2T(\vt{1}{2})=T(\vt{1}{0})=\vd{0}{1}{-2}-\vd{4}{-2}{2}=\vd{-4}{3}{-4}$\\
+  $\frac{1}{2}(T(\vt{1}{2}-T(\vt{1}{0}))=T(\vt{0}{1})=\frac{1}{2}(\vd{2}{-1}{1}-\vd{-4}{3}{-4})=\vd{3}{-2}{\frac{5}{2}}$\\
+  so the standard matrix is $\left[\begin{matrix} -4 & 3 \\ -1 & -2 \\ -4 & \frac{5}{2} \end{matrix}\right]$
 
 }
  
@@ -135,8 +137,11 @@ Due October 4, 2024 \\
 \sol{
   \begin{enumerate}
     \item FALSE\\
+      It can if there are more rows than columns.
     \item TRUE\\
+      If we think about it geometricaly, $v_3$ must be in the plane spaned by the other two vectors to be a linear combination of them. Since it is not, it cannot be a linear combination of them.
     \item TRUE\\
+      The linear map outputs linear combinations of the columns of the matricies. The span of these columns represents every possible linear combination, which is the same as the range.
   \end{enumerate}
 }
   
@@ -160,8 +165,10 @@ Due October 4, 2024 \\
     \item
       We know that AB's first two columns will also be the same.
     \item
-      $\left[\begin{matrix} 2 & -1 & 3\end{matrix}\right]\cdot\left[\begin{matrix} 0 \\ 2 \\ 1\end{matrix}\right]=\left[\begin{matrix} 1 \end{matrix}\right]$ \\ %TODO add explanation
-      $\left[\begin{matrix} 2 \\ -1 \\ 3\end{matrix}\right]\cdot\left[\begin{matrix} 0 & 2 & 1\end{matrix}\right]=\left[\begin{matrix} 0 & 4 & 2 \\ 0 & -2 & -1 \\ 0 & 6 & 3 \end{matrix}\right]$ 
+      $\left[\begin{matrix} 2 & -1 & 3\end{matrix}\right]\cdot\left[\begin{matrix} 0 \\ 2 \\ 1\end{matrix}\right]=\left[\begin{matrix} 1 \end{matrix}\right]$ \\
+      This is just a $1\times1$ matrix with the element being the dot product of the two vectors.\\
+      $\left[\begin{matrix} 2 \\ -1 \\ 3\end{matrix}\right]\cdot\left[\begin{matrix} 0 & 2 & 1\end{matrix}\right]=\left[\begin{matrix} 0 & 4 & 2 \\ 0 & -2 & -1 \\ 0 & 6 & 3 \end{matrix}\right]$\\
+      This has every combination of multiplying one element of one vector with one element of the other vector, almost like a multiplication table.
   \end{enumerate}
 }
  
@@ -172,6 +179,14 @@ Due October 4, 2024 \\
 \[ A^{-1} = \frac{1}{ad-bc} \left[\begin{matrix} d & -b \\ -c & a \end{matrix}\right]. \] 
  Hint: Multiply $A$ with the given matrix and check the result.
 
+ \sol{
+  Multiplying the two matrices, we get
+  $$
+    \frac{1}{ad-bc}\left[\begin{matrix} a & b \\ c & d \end{matrix}\right] \left[\begin{matrix} d & -b \\ -c & a \end{matrix}\right]=
+    \frac{1}{ad-bc}\left[\begin{matrix} ad-bc & ba-ab \\ dc-cd & ad-bc \end{matrix}\right] = \left[\begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix}\right]
+  $$
+  Which is the $2\times2$ identity matrix, showing that the matrices are inverses of each other.
+ }
 
 
 
@@ -182,13 +197,30 @@ Due October 4, 2024 \\
   C = \left[\begin{matrix} 0 & 1 & 3 \\ 0 & 0 & 1 \\ 0 & -1 & -1 \end{matrix}\right]
 \]
 
-
+\sol{
+  \begin{enumerate}
+    \item
+      $A^{-1}=\frac{1}{-22}\left[\begin{matrix} -9 & -1 \\ -4 & 2 \end{matrix}\right]$
+    \item
+      $B$ is not invertable because $\frac{1}{ad-bc}=\frac{1}{-12+12}=\frac{1}{0}$
+    \item
+      $C$ is not invertable because the first column is all zeroes. This means there is no way for element 1,1 to be 1 no matter what it is multiplied by.
+  \end{enumerate}
+}
 
 \item
  A {\bf diagonal matrix} $A$ has all entries $0$ except on the diagonal, that is,
  \[ A = \left[\begin{matrix} a_{11} & 0 &  \dots & 0 \\ 0 & a_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\
      0 & 0 & \dots & a_{nn} \end{matrix}\right]. \]
  Under which conditions is $A$ invertible and what is $A^{-1}$? 
+
+
+
+ \sol{
+  $A$ as long as none of the elements on the diagonal are zero.
+  \[ A^{-1} = \left[\begin{matrix} \frac{1}{a_{11}} & 0 &  \dots & 0 \\ 0 & \frac{1}{a_{22}} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \dots & \frac{1}{a_{nn}} \end{matrix}\right]. \]
+ }
 
 \end{enumerate}
 \end{document}

@@ -1,0 +1,119 @@
+\documentclass[12pt,oneside]{amsart}
+\thispagestyle{empty}
+\usepackage{lmodern}
+\usepackage[
+%scale=0.75,
+margin=1in,
+]{geometry}
+\usepackage{versions}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
+\else \excludeversion{solution} \fi
+\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
+\else \excludeversion{grading} \fi
+
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bo}{\mathbf{0}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+
+
+\newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
+\newcommand{\vd}[3]{\left[\begin{matrix} #1 \\ #2 \\ #3 \end{matrix}\right]}
+
+
+
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large\textbf{Math 2135 - Assignment 7}}\\
+\bigskip
+Due October 18, 2024 \\
+\end{center}
+\bigskip
+\thispagestyle{empty}
+
+
+\begin{enumerate}
+ \item
+ Explain why the following are not subspaces of $\R^2$.
+ Give explicit counter examples for subspace properties that are not satisfied. 
+ \begin{enumerate}
+ \item $U = \{ \vt{x}{y} \mid x,y\in\R, x\geq 0 \}$
+ \item $V = \Z^2$ \quad ($\Z$ denotes the set of all integers)
+ \item $W = \{ \vt{x}{y} \mid x,y\in\R, |x|=|y| \}$
+ \end{enumerate}
+ 
+\item
+ Which of the following are subspaces of the vector space $\R^\R = \{ f \colon \R \to \R \}$ of all functions from
+ $\R$ to $\R$? Check all subspace properties or give one that is not satisfied.
+\begin{enumerate}
+\item $\{ f \colon \R \to \R \mid f(0) = 1 \}$
+\item $\{ f \colon \R \to \R \mid f(3) = 0 \}$
+\item $\{ f \colon \R \to \R \mid f \text{ is continuous} \}$
+\end{enumerate}
+
+
+
+\item Let $\bv_1,\ldots,\bv_n$ be vectors in a vector space $V$.
+Show that $U := \Span\{\bv_1,\ldots,\bv_n\}$ is a subspace of $V$.
+
+
+\item
+Let $A\in\R^{m \times n}$.
+Prove that $\Nul(A)$ is a subspace of $\R^n$.
+
+
+
+\item Explain whether the following are true or false (give counter examples if possible):
+\begin{enumerate}
+\item  
+ Every vector space is a subspace of itself.
+\item
+ Each plane in $\R^3$ is a subspace.
+\item
+ Let $U$ be a subspace of a vector space $V$. Any linear combination of vectors of $U$ is also in $V$.
+\item
+ Let $v_1,\dots, v_n$ be in a vector space $V$. Then $\Span(v_1,\dots, v_n)$ is the smallest subspace of $V$
+ containing $v_1,\dots, v_n$. 
+\end{enumerate}
+
+
+\item Are the vectors $\bv_0 = 1$, $\bv_1 = t$, $\bv_2 =t^2$ in the vector space $\R^\R := \{ f \colon \R \to \R \}$ linearly independent?
+
+
+
+\item
+ Which of the following are bases of $\R^3$? Why or why not?
+\[ A = ( \vd{1}{2}{0}, \vd{2}{3}{4} ), B = ( \vd{1}{2}{0}, \vd{2}{3}{4}, \vd{0}{-1}{4} ), C = (\vd{1}{2}{0}, \vd{2}{3}{4}, \vd{0}{1}{1} ) \]
+
+
+
+\item Give a basis for Nul$(A)$ and a basis for Col$(A)$ for
+\[ A = \left[ \begin{matrix}
+ 0 & 2 & 0 & 3 \\
+ 1 & -4 & -1 & 0 \\
+ -2 & 6 & 2 & -3
+ \end{matrix} \right] \]
+
+
+
+\end{enumerate}
+\end{document}
+
+
