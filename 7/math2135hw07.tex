@@ -28,6 +28,16 @@ margin=1in,
 \newcommand{\by}{\mathbf{y}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
+
+\usepackage{mdframed}
+\newcommand\sol[1]{
+\medskip
+\begin{mdframed}
+\textbf{Ans:\\} #1
+\end{mdframed}
+\medskip
+}
+
 \DeclareMathOperator{\Span}{Span}
 \DeclareMathOperator{\Nul}{Nul}
 \DeclareMathOperator{\Col}{Col}
@@ -35,7 +45,7 @@ margin=1in,
 
 \newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
 \newcommand{\vd}[3]{\left[\begin{matrix} #1 \\ #2 \\ #3 \end{matrix}\right]}
-
+\newcommand{\vf}[4]{\left[\begin{matrix} #1 \\ #2 \\ #3 \\ #4 \end{matrix}\right]}
 
 
 \begin{document}
@@ -59,6 +69,17 @@ Due October 18, 2024 \\
  \item $W = \{ \vt{x}{y} \mid x,y\in\R, |x|=|y| \}$
  \end{enumerate}
  
+ \sol{
+  \begin{enumerate}
+    \item This is not a subspace because it is not closed under scaling. For example, 
+      $-1\cdot \vt{1}{2} = \vt{-1}{-2} \notin U$ because $-1 < 0$.
+    \item This is not a subspace because it is not closed under scaling. For example,
+      $0.2\cdot \vt{1}{2} = \vt{0.2}{0.4} \notin V$ because $0.2 \notin \Z$
+    \item This is not a subspace because it is not closed under addition. For example,
+      $\vt{1}{1} + \vt{-1}{1} = \vt{0}{2} \notin W$ because $0\neq-2$
+  \end{enumerate}
+ }
+
 \item
  Which of the following are subspaces of the vector space $\R^\R = \{ f \colon \R \to \R \}$ of all functions from
  $\R$ to $\R$? Check all subspace properties or give one that is not satisfied.
@@ -68,16 +89,54 @@ Due October 18, 2024 \\
 \item $\{ f \colon \R \to \R \mid f \text{ is continuous} \}$
 \end{enumerate}
 
+\sol{
+  \begin{enumerate} 
+    \item
+      Not a subspace\\ This is not a subspace because it is not closed under addition. If we add two functions where $f(0)=1$, we will get a function where $f(0)=2$.
+    \item
+      Subspace\\
+      \begin{enumerate}
+        \item
+          Addition\\$f(3)+f(3)=0+0=0$ So it is closed under addition.
+        \item
+          Scaling\\$af(3)=a\cdot0=0$ So it is closed under scaling.
+        \item
+          Zero vector\\Contains the zero vector $f(x)=0$.
+      \end{enumerate}
+    \item
+      Subspace\\
+      \begin{enumerate}
+        \item
+          Addition\\Two continuous functions added cannot create a discontinuous function (closed under addition).
+        \item
+          Scaling\\Scaling a continuous function creates a new continuous function (closed under scaling).
+        \item
+          The zero vector $f(x)=0$ is continuous.
+      \end{enumerate}
 
+  \end{enumerate}
+}
 
 \item Let $\bv_1,\ldots,\bv_n$ be vectors in a vector space $V$.
 Show that $U := \Span\{\bv_1,\ldots,\bv_n\}$ is a subspace of $V$.
+\sol{
+  U must be a subspace of V, because it can be shown that it has all the required properties:
+  \begin{itemize}
+    \item[1.] By definition $U \subseteq V$ because $\bv_1,\ldots,\bv_n\in V$
+    \item[2.] Since span is the linear combination of all the vectors, and that includes multiplying them all by zero, U contains the zero element.
+    \item[3\&4.] Since span is the linear combination of all the vectors, this includes all possible scalings and additions of those vectors, making their span closed under addition and scaling.
+  \end{itemize}
+}
 
 
 \item
 Let $A\in\R^{m \times n}$.
 Prove that $\Nul(A)$ is a subspace of $\R^n$.
 
+\sol{
+  The nullspace of A must be a subspace of $\R^n$ because it can be represented as the span of some number of n dimensional vectors representing the set of homogenous linear equations defined by $Ax=0$.
+  As was found in the previous question, the fact that this is a span means that it is a subspace.
+}
 
 
 \item Explain whether the following are true or false (give counter examples if possible):
@@ -93,15 +152,44 @@ Prove that $\Nul(A)$ is a subspace of $\R^n$.
  containing $v_1,\dots, v_n$. 
 \end{enumerate}
 
+\sol{
+  \begin{enumerate}
+    \item \textbf{True}\\
+      Every vector space is by definition closed under addition and multiplication, has its own zero vector and is a(n impropper) subset of itself.
+    \item \textbf{False}\\
+      Some planes don't have the zero vector in them.Ex: $x=5$
+    \item \textbf{True}\\
+      The elements in U are closed over linear combination, and U's elements are by definition a subset of V's, so all the linear combinations of elements in U are in V.
+    \item \textbf{True}\\
+      Since the subspace must be closed under addition and scaling, any subspace containing the vectors $v_1,\dots, v_n$ must be at least as large as $\Span(v_1,\dots, v_n)$.
+  \end{enumerate}
+}
+
 
 \item Are the vectors $\bv_0 = 1$, $\bv_1 = t$, $\bv_2 =t^2$ in the vector space $\R^\R := \{ f \colon \R \to \R \}$ linearly independent?
 
-
+  \sol{
+    Yes, they are linearly independant because in order to go from $\bv_0$ to $\bv_1$ to $\bv_2$ you would have to multiply by $t$ in each step. The multiplication allowed in vector spaces is only by constant scalars, not variables, and there is no other way to generate these elements from one another.
+  }
 
 \item
  Which of the following are bases of $\R^3$? Why or why not?
 \[ A = ( \vd{1}{2}{0}, \vd{2}{3}{4} ), B = ( \vd{1}{2}{0}, \vd{2}{3}{4}, \vd{0}{-1}{4} ), C = (\vd{1}{2}{0}, \vd{2}{3}{4}, \vd{0}{1}{1} ) \]
 
+\sol{
+  \begin{enumerate}
+    \item
+      Not a basis\\ The basis for $\R^3$ must have 3 vectors in it because it is 3 dimensional.
+    \item
+      Not a basis\\ $-2\cdot\vd{1}{2}{0}+\vd{2}{3}{4}=\vd{0}{-1}{4}$ so they are not linearly independant.
+    \item
+      Basis\\ By row reducing the matrix $\left[\begin{matrix} 1 & 2 & 0 \\ 2 & 3 & 1\\ 0 & 4 & 1 \end{matrix}\right]$ We get $\left[\begin{array}{rrr}
+1 & 2 & 0 \\
+0 & -1& 1 \\
+0 & 0 & 5
+\end{array}\right]$. We can see from this that since there are no free variables and a pivot in every row, the vectors are independent and thus are a basis of $\R^3$ 
+  \end{enumerate}
+}
 
 
 \item Give a basis for Nul$(A)$ and a basis for Col$(A)$ for
@@ -112,6 +200,22 @@ Prove that $\Nul(A)$ is a subspace of $\R^n$.
  \end{matrix} \right] \]
 
 
+\sol{
+  First, we put A in reduced echelon form:
+  $$\left[\begin{array}{rrrr}
+1 & 0 & -1 & 6 \\
+0 & 1 & 0 & \frac{3}{2} \\
+0 & 0 & 0 & 0
+\end{array}\right]$$
+  \begin{itemize}
+    \item \textbf{Nul(A):} Using the echelon form of A, we can get a set of homogenous equations:
+      $$x_1=x_3-6x_4, x_2=-\frac{3}{2}x_4$$
+      From this we get the solution to the homogenous equation: $x=s\vf{1}{0}{1}{0}+t\vf{-6}{-\frac{3}{2}}{0}{1}$ where $s=x_3$ and $t=x_4$.
+      These two vectors are the basis for the nullspace.
+    \item \textbf{Col(A):}
+      We see that there are two pivot columns in the echelon form of the matrix. We take what these columns were in the original matrix as the basis of the column-space. That is, $\vd{0}{1}{-2}$ and $\vd{2}{-4}{6}$ is the basis. 
+  \end{itemize}
+}
 
 \end{enumerate}
 \end{document}

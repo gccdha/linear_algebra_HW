@@ -1,0 +1,231 @@
+\documentclass[12pt,a4paper]{amsart}
+\thispagestyle{empty}
+\usepackage{lmodern}
+\usepackage[
+%scale=0.75,
+margin=1in,
+]{geometry}
+\usepackage{versions}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
+\else \excludeversion{solution} \fi
+\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
+\else \excludeversion{grading} \fi
+
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bo}{\mathbf{0}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{mdframed}
+\newcommand
+\sol[1]{
+\medskip
+\begin{mdframed}
+\textbf{Ans:\\} #1
+\end{mdframed}
+\medskip
+}
+
+
+
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\rank}{rank}
+
+
+\newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
+\newcommand{\vd}[3]{\left[\begin{matrix} #1 \\ #2 \\ #3 \end{matrix}\right]}
+\newcommand{\vf}[4]{\left[\begin{matrix} #1 \\ #2 \\ #3 \\ #4 \end{matrix}\right]}
+
+
+\begin{document}
+%\maketitle
+\begin{center}
+{\Large\textbf{Math 2135 - Assignment 8}}\\
+\bigskip
+Due October 25, 2024 \\
+\end{center}
+\bigskip
+\thispagestyle{empty}
+
+
+\begin{enumerate}
+\item Show that the vectors $\bv_0 = 1$, $\bv_1 = 1+t$, $\bv_2 =1+t+t^2$ form a basis for the vector space
+ $P_2$ of polynomials of degree $\leq 2$.
+
+ \sol{
+    We can see that the vectors are linearly independant by observation: there is no way to sum any polynomial with degree n-1 to get a polynomial of degree n without knowing t.
+    We can then see that these vectors span the vector space $P_2$ by seeing that we can derive the unit vectors of that space from these basis vectors:\\
+    $e_0=v_0=1 \quad e_1=v_1-v_0=t \quad e_2=v_2-v_1=t^2$
+ }
+
+\item Give a basis for Nul$(A)$ and a basis for Col$(A)$ for
+\[ A = \left[ \begin{matrix}
+ 0 & 2 & 0 & 3 \\
+ 1 & -4 & -1 & 0 \\
+ -2 & 6 & 2 & -3
+ \end{matrix} \right] \]
+
+\sol{
+  First, we put A in reduced echelon form:
+  $$\left[\begin{array}{rrrr}
+1 & 0 & -1 & 6 \\
+0 & 1 & 0 & \frac{3}{2} \\
+0 & 0 & 0 & 0
+\end{array}\right]$$
+  \begin{itemize}
+    \item \textbf{Nul(A):} Using the echelon form of A, we can get a set of homogenous equations:
+      $$x_1=x_3-6x_4, x_2=-\frac{3}{2}x_4$$
+      From this we get the solution to the homogenous equation: $x=s\vf{1}{0}{1}{0}+t\vf{-6}{-\frac{3}{2}}{0}{1}$
+ where $s=x_3$ and $t=x_4$.
+      These two vectors ($\vf{1}{0}{1}{0}$and$\vf{-6}{-\frac{3}{2}}{0}{1}$) are the basis for the nullspace.
+    \item \textbf{Col(A):}
+      We see that there are two pivot columns in the echelon form of the matrix. We take what these columns were
+in the original matrix as the basis of the column-space. That is, $\vd{0}{1}{-2}$ and $\vd{2}{-4}{6}$ is the basis.
+  \end{itemize}
+}
+
+  
+\item
+ Give $2$ different bases for 
+\[ H = \Span\{\vd{1}{1}{2}, \vd{3}{-1}{0}, \vd{-1}{3}{4}\} \]
+\sol{
+  First we put the vectors into a matrix:
+  $$\left[\begin{array}{rrr}
+1 & 3 & -1 \\
+1 & -1 & 3 \\
+2 & 0 & 4
+\end{array}\right]$$
+  Then we put the matrix in echelon form:
+$$\left[\begin{array}{rrr}
+1 & 3 & -1 \\
+0 & -4 & 4 \\
+0 & 0 & 0
+\end{array}\right]$$
+
+From this we can see that the vectors are not lineraly independant, but it is also clear to see that no pair of vectors is linearly dependant, therefore any par of vectors can be a basis for this vector space.\\
+Basis 1: ${\vd{1}{1}{2},\vd{3}{-1}{0}}$\\
+Basis 2: ${\vd{1}{1}{2},\vd{-1}{3}{4}}$
+}
+
+\item
+ Let $B= (b_1,\dots,b_n)$ be a basis for a vector space $V$ and consider the coordinate mapping
+ $V\to\R^n,\ x\mapsto [x]_B$.
+\begin{enumerate}
+\item Show that $[c \cdot x]_B  = c[x]_B$ for all $x\in V, c\in\R$.
+\item Show that the coordinate mapping is onto $\R^n$.
+\end{enumerate}
+
+
+\sol{
+  \begin{enumerate}
+    \item
+      $[c\cdot x]_B = [c\cdot d_1\cdot b_1 + \hdots + c\cdot d_n\cdot b_n]_B=c(d_1\cdot e_1 + \hdots + d_n\cdot e_n)=c[d_1\cdot b_1 + \hdots + d_n\cdot b_n]_B=c[x]_B$ for $x=\vd{d_1}{\vdots}{d_n}$.
+    \item
+  $x=c_1\cdot b_1+\hdots+c_n\cdot b_n$ where $c_i\in \R$ . Since there are $n$ constants, and the codomain is n-dimensional, every $[x]_B$ is a linear combination of all the basis vectors of $\R^n$: $[x]_B = c_1\cdot e_1+\hdots+c_n\cdot e_n$ meaning that our range is also n-dimensional and thus the function is surjective.
+  \end{enumerate}
+}
+\item
+ Let $B = (\vt{1}{-2},\vt{-3}{4})$ be a basis of $\R^2$.
+\begin{enumerate}
+%\item 
+% Give the change of coordinates matrix $P_{E\leftarrow B}$ from $B$ to the standard basis $E = (e_1,e_2)$
+% and $P_{B\leftarrow E}$.  
+\item
+ Find vectors $u,v\in\R^2$ with $[u]_B = \vt{0}{1}, [v]_B = \vt{3}{2}$.
+\item
+ Compute the coordinates relative to $B$ of $w = \vt{-2}{4}$ and $x = \vt{1}{0}$.
+\end{enumerate} 
+
+\sol{
+  \begin{enumerate}
+    \item
+      $u=\vt{-3}{4}$ (just $1 \cdot b_2$) and $v=\vt{3}{-6}+\vt{-6}{8}=\vt{-3}{2}$
+    \item
+      By observation, $w=-2\cdot b_1$ so $[w]_B=\vt{-2}{0}$\\
+      Row reduce:$\left[\begin{matrix} 1 & -3 & 1 \\ -2 & 4 & 0 \end{matrix}\right]$ $\to$ $\left[\begin{matrix} 1 & 0 & -2 \\ 0 & 1 & -1 \end{matrix}\right]$ so $[x]_B=\vt{-2}{-1}$
+  \end{enumerate}
+}
+
+\item
+ Let $B = (1,t,t^2)$ and $C = (1,1+t,1+t+t^2)$ be bases of $\mathbb{P}_2$.
+\begin{enumerate}
+\item Determine the polynomials $p,q$ with $[p]_B = \vd{3}{0}{-2}$ and $[q]_C = \vd{3}{0}{-2}$.
+\item Compute $[r]_B$ and $[r]_C$ for $r=3+2t+t^2$.
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      $p=3-2t^2$ and $q=3-2-2t-2t^2=1-2t-2t^2$ 
+    \item
+      By observation: $[r]_B=\vd{3}{2}{1}$\\
+      Put the following matrix in reduced echelon form: $\left[\begin{matrix}1 & 1 &1 & 3 \\ 0 & 1 & 1 & 2 \\ 0 &0 &1 &1 \end{matrix}\right] \to \left[\begin{matrix}1 & 0 &0 & 1 \\ 0 & 1 & 0 & 1 \\ 0 &0 &1 &1 \end{matrix}\right]$ so $[r]_C=\vd{1}{1}{1}$
+  \end{enumerate}
+}
+
+\item %\cite[Sections 4.3, 4.5]{La-LA}
+Let
+\[ A = \left[\begin{matrix}
+-5 & 8 & 0 & -17 & -2 \\
+3 & -5 & 1 & 5 & 1 \\
+11 & -19 & 7 & 1 & 3 \\
+7 & -13 & 5 & -3 & 1 \\
+\end{matrix}\right].
+\]
+Find bases and dimensions for $\Nul A$, $\Col A$, and $\Row A$, respectively.
+\sol{
+  First we row reduce the matrix (using a computer):
+  $$\left[\begin{array}{rrrrr}
+1 & 0 & 0 & 5 & 2 \\
+0 & 1 & 3 & -14 & 1 \\
+0 & 0 & 4 & -20 & 0 \\
+0 & 0 & 0 & 0 & 0
+\end{array}\right]$$
+
+\textbf{Col A:} For the column space, we can take the columns from the unreduced matrix with pivots in the reduced matrix so the basis is $\{\vf{-5}{3}{11}{7},\vf{8}{-5}{-19}{-13},\vf{0}{1}{7}{5}\}$ which is 3-dimensional\\
+\textbf{Row A:} For the row space, we can take the rows from the reduced matrix that have pivots as the basis: $\{\left[\begin{matrix} 1 \\ 0 \\ 0 \\ 5 \\ 2 \end{matrix}\right],\left[\begin{matrix} 0 \\ 1 \\ 3 \\ -14 \\ 1 \end{matrix}\right],\left[\begin{matrix} 0 \\ 0 \\ 4 \\ -20 \\ 0 \end{matrix}\right]\}$ which is 3-dimensional.\\
+\textbf{Nul A:} For the nullspace, we find the solution of the homogenous system: 
+$x_1=-5x_4-2x_5\quad x_2=-x_4-x_5 \quad x_3=5x_4$ this yields the vectors $\left[\begin{matrix} -5 \\ -1 \\ 5 \\ 1 \\ 0 \end{matrix}\right] \left[\begin{matrix} -2 \\ -1 \\ 0 \\ 0 \\ 1 \end{matrix}\right]$ which is 2-dimensional.
+}
+\item True or false? Explain.
+\begin{enumerate}
+\item If $B$ is an echelon form of a matrix $A$, then the pivot columns of $B$ form a basis for the column space of
+  $A$.
+\item If $B$ is an echelon form of a matrix $A$, then the nonzero rows of $B$ form a basis for the row space of $A$.
+%\item A basis of $B$ is a set of linear independent vectors in $V$ that is as large as possible.
+\item If $\dim V = n$, then any $n$ vectors that span $V$ are linearly independent.
+\item Every 2-dimensional subspace of $\R^3$ is a plane. 
+ \end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      False: the same columns with pivots in B, in A are the basis, not the pivots of B.
+    \item
+      True: the rows are linearly independant (because of echelon form) and since row reduction uses row opperations, they span Col A.
+    \item
+      True: if they were not linearly independant, they could not span n dimensions, because there would be less than n linearly independant matrices.
+    \item
+      True: the basis of such 2 dimensional subspaces must be 2 linearly independand 3 dimensional vectors, which always define a plane.
+  \end{enumerate}
+
+}
+
+\end{enumerate}
+\end{document}
