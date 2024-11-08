@@ -1,0 +1,240 @@
+\documentclass[12pt,oneside]{amsart}
+\thispagestyle{empty}
+\usepackage{lmodern}
+\usepackage[
+%scale=0.75,
+margin=1in,
+]{geometry}
+\usepackage{versions}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\ifsol \newenvironment{solution}{\medskip\par\noindent\textbf{Solution:\\}}{\hfill\qed\medskip} 
+\else \excludeversion{solution} \fi
+\ifsol \newenvironment{grading}{\par\noindent\textbf{Grading:}}{\hfill\\}
+\else \excludeversion{grading} \fi
+
+\newcommand{\id}{P}
+%\newcommand{\bb}{\mathbf{b}}
+%\newcommand{\be}{\mathbf{e}}
+\newcommand{\bo}{\mathbf{0}}
+%\newcommand{\bp}{\mathbf{p}}
+%\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{u}
+\newcommand{\bv}{v}
+\newcommand{\bw}{w}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{y}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\usepackage{mdframed}
+\newcommand
+\sol[1]{
+\medskip
+\begin{mdframed}
+\textbf{Ans:\\} #1
+\end{mdframed}
+\medskip
+}
+
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+
+
+\newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
+\newcommand{\vd}[3]{\left[\begin{smallmatrix} #1 \\ #2 \\ #3 \end{smallmatrix}\right]}
+
+
+\begin{document}
+\begin{center}
+{\Large\textbf{Math 2135 - Assignment 10}}\\
+\medskip
+Due November 8, 2024 \\
+\end{center}
+\bigskip
+\thispagestyle{empty}
+
+
+{\bf Problems 1-5 are review material for the second midterm on November 6.
+Solve them before Wednesday!}
+
+\bigskip
+
+\begin{enumerate}
+\item
+  Let $V, W$ be vector spaces over $\R$ with zero vectors $0_V , 0_W$, respectively.
+  Let $f\colon V\to W$ be linear. Show
+\begin{enumerate}
+\item $f (0_V ) = 0_W$ ,
+\item the kernel $\ker f := \{v\in V \ :\ f(v) = 0_W \}$ of $f$ is a subspace of $V$.
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      the zero vector in V multiplied by x (that represents the linear map) will always end up being zero (since there is only multiplication) in the output.
+    \item
+      We know from the previous part that $\ker f$ is a subset of $V$.\\
+      The kernel is closed under addition because $f(v)=0$ and $0+0=0$\\
+      The kernel is closed under multiplication because $f(v)=0$ and $0n=0$ for all $n\in\R$
+  \end{enumerate}
+}
+
+\item
+ Let $T\colon P_2 \to \R, p\mapsto p(3)$, be the map that evaluates a polynomial $p$ at $x=3$.
+\begin{enumerate}
+\item Show that $T$ is linear.
+\item Determine the kernel of $T$, that is, $\ker T = \{ p \in P_2 \ :\ T(p) = 0 \}$,
+ and the image of $T$, that is, $T(P_2)$.
+\item Is $T$ injective, surjective, bijective?
+\end{enumerate}  
+
+\sol{
+  \begin{enumerate}
+    \item
+      Property 1: For $a,b\in P_2$ it is true that $a(3)+b(3)=(a+b)(3)$ (since the polynomials don't change each other in the proccess of addition)\\
+      Property 2: For $a \in P_2$ and $n\in\R$ it is true that $n\cdot a(3) = (n\cdot a)(3)$ (multiplying the result or all of the terms yeilds the same outcome)
+    \item
+      The kernel is where the polynomials equal zero when evaluated at 3 so the kernel is all polynomials of degree 2 with the root $(x-3)$.\\
+      The image is just $\R$ because any real number can be output by a polynomial of degree 2. 
+    \item
+      It is not injective because many polnomials output the same value for 3, but it is surjective since the range is the same as the codomain.
+    
+  \end{enumerate}
+}
+
+\item
+ Let $B = (b_1,b_2)$ with $b_1 = \vd{-5}{11}{5}, b_2 = \vd{3}{-1}{4}$ and
+  $C = (\vd{1}{1}{3},\vd{2}{-2}{1})$ be bases of a subspace $H$ of $\R^3$.
+\begin{enumerate}
+\item
+ Compute the coordinates $[b_1]_C$ and $[b_2]_C$.
+\item 
+ What is the change of coordinate matrix $P_{C\leftarrow B}$?
+\item  
+ What is the change of coordinate matrix $P_{B\leftarrow C}$? 
+\end{enumerate}
+
+\sol{
+ \begin{enumerate}
+   \item
+     Augmented matrix: $\left[\begin{matrix}1 & 2 & -5 & 3\\ 1 & -2 & 11 & -1 \\ 3 & 1 & 5 & 4 \end{matrix}\right]\to\left[\begin{matrix}1 & 0 & 3 & 1 \\ 0 & 1 & -4 & 1 \\ 0 & 0 & 0 & 0 \end{matrix}\right]$\\
+     So $[b_1]_C=\vt{3}{-4},[b_2]_C=\vt{1}{1}$
+   \item
+     Using the vectors we just found, $P_{C\leftarrow B}=\left[\begin{matrix}3&1\\-4&1\end{matrix}\right]$
+   \item
+     Now we just take the inverse of $P_{C\leftarrow B}$ to get $P_{B \leftarrow C} = \frac{1}{7}\cdot \left[\begin{matrix}1&-1\\4&3\end{matrix}\right]$
+ \end{enumerate}
+}
+
+\item
+  Let $C = (1+t,t+t^2,1+t^2)$ be a basis for $P_2$.  Compute the coordinates
+ $[p]_C$ for $p = 2+t^2$.
+
+ \sol{
+   we can represent this problem as the augmented matrix\\
+   $\left[\begin{matrix} 1&0&1&2\\1&1&0&0\\0&1&1&1 \end{matrix}\right] \to \left[\begin{matrix} 1&0&0&\frac12\\0&1&0&-\frac12\\0&0&1&\frac32 \end{matrix}\right]$ so the answer is $\vd{\frac12}{-\frac12}{\frac32}$
+ }
+
+\item
+\begin{enumerate}
+\item
+ Show that $A\in\R^{n\times n}$ is invertible iff rank $A = n$.
+\item
+ If $A$ is a $3\times 4$-matrix, what is the largest possible rank of $A$?
+ What is the smallest possible dimension of Nul $A$? 
+\item 
+ If the nullspace of a $4\times 6$-matrix $B$ has dimension $3$, what is the dimension of the row space
+ of $B$?
+ \end{enumerate}
+
+ \sol{
+  \begin{enumerate}
+    \item
+      $A$ is invertible iff its columns are linearly independant. $A$'s columns are linearly independant iff rank $ A=n$
+    \item
+      The largest possible rank of A is 3 (3 rows) and the smallest possible dimension of the nullspace is 1(1 more column than row).
+    \item
+      The dimension of the rowspace(/columnspace) and the dimension of the nullspace must add up to the number of columns so Row A has dimension 3.
+  \end{enumerate}
+ }
+
+
+\item
+ Compute the determinant of the matrices by cofactor expansion. Pick a row or column that yields the least
+ amount of computation:
+\[ A = \left[\begin{matrix}
+0 & 1 & -3 \\
+5 & 4 & -4 \\
+0 & -3 & -4 \end{matrix}\right] \hspace{1cm}
+ B = \left[\begin{matrix}
+1 & 0 & -3 & 0 \\
+3 & 1 & 5 & 1 \\
+2 & 0 & 0 & 0 \\
+7 & 1 & -2 & 5 \\
+\end{matrix}\right].
+\]
+
+\sol{
+  \begin{enumerate}
+    \item
+      Using row 2 we just have to do 1 calculation: $\det A=-5\left|\begin{matrix} 1 & -3 \\ -3 & -4 \end{matrix}\right|=(-5)(-13)=65$
+    \item
+      Using row 3 in B we have to do 1 $3\times3$ matrix, and if we do the first row in that matrix we only have to do one again: $\det B=2\left|\begin{matrix} 0 & -3 & 0 \\ 1 & 5 & 1 \\ 1 & -2 & 5 \end{matrix}\right|=(2)(3)\left|\begin{matrix}1 & 1 \\ 1 & 5\end{matrix}\right|=(2)(3)(4)=24$
+  \end{enumerate}
+}
+
+\item
+ {\bf Rule of Sarrus for the determinant of $3\times 3$-matrices.}
+ Let
+\[ A = \left[\begin{matrix}
+ a_{11} & a_{12} & a_{13} \\
+ a_{21} & a_{22} & a_{23} \\
+ a_{31} & a_{32} & a_{33} \end{matrix}\right] \]
+ Prove that
+\[ \det A =  a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33} \]
+ Hint: Expand $\det A$ across the first row.
+
+ \sol{
+  $$\left|\begin{matrix}
+ a_{11} & a_{12} & a_{13} \\
+ a_{21} & a_{22} & a_{23} \\
+ a_{31} & a_{32} & a_{33} \end{matrix}\right| = a_{11} \left|\begin{matrix} a_{22} & a_{23} \\ a_{32} & a{33} \end{matrix}\right|-a_{12} \left|\begin{matrix} a_{21} & a_{23} \\ a_{31} & a{33} \end{matrix}\right|+ a_{13} \left|\begin{matrix} a_{21} & a_{22} \\ a_{31} & a{32} \end{matrix}\right|=$$ $$a_{11}a_{22}a_{33} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31}=$$$$a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}$$
+ }
+
+
+\item
+ Consider $A = \left[\begin{matrix} a & b \\ c & d \end{matrix}\right]$.
+\begin{enumerate}
+\item
+ How does switching the rows effect the determinant? Compare $\det A$ and
+ $\det \left[\begin{matrix} c & d \\ a & b \end{matrix}\right]$
+\item
+ How does multiplying one row by a scalar effect the determinant?
+ Compare $\det A$ and $\det \left[\begin{matrix} ra & rb \\ c & d \end{matrix}\right]$. 
+\item
+ How does adding a multiple of one row to the other row effect the determinant?
+ Compare $\det A$ and $\det \left[\begin{matrix} a & b \\ c+ra & d+rb \end{matrix}\right]$. 
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      It multiplies the determinant by -1: $\det A=ad-bc$ and $\det \left[\begin{matrix} c & d \\ a & b \end{matrix}\right]=bc-da=-\det A$
+    \item
+      It multiplies the determinant by r: $\det \left[\begin{matrix} ra & rb \\ c & d \end{matrix}\right]=rad-rbc=r(ad-bc)=r\det A$ 
+    \item
+      $\det \left[\begin{matrix} a & b \\ c+ra & d+rb \end{matrix}\right]=ad+rab-bc-rab=ad-bc=\det A$
+  \end{enumerate}
+}
+
+\end{enumerate}
+\end{document}
+
+
+
