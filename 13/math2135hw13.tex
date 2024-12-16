@@ -1,0 +1,228 @@
+\documentclass[12pt,oneside]{amsart}
+\thispagestyle{empty}
+\usepackage{lmodern}
+\usepackage[
+%scale=0.75,
+margin=0.95in,
+]{geometry}
+\usepackage{versions}
+\newif\ifsol\solfalse
+
+%\soltrue % comment to hide solution
+
+\ifsol \newenvironment{solution}{\par\noindent\textbf{Solution:\\}}{\hfill\qed\\} 
+\else \excludeversion{solution} \fi
+
+%\newcommand{\ba}{\mathbf{a}}
+%\newcommand{\bb}{\mathbf{b}}
+%\newcommand{\be}{\mathbf{e}}
+\newcommand{\bo}{\mathbf{0}}
+%\newcommand{\bp}{\mathbf{p}}
+%\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{\textbf{u}}
+\newcommand{\bv}{\textbf{v}}
+\newcommand{\bw}{\textbf{w}}
+\newcommand{\bx}{x}
+\newcommand{\by}{y}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Nul}{Nul}
+\DeclareMathOperator{\Col}{Col}
+\DeclareMathOperator{\Row}{Row}
+\DeclareMathOperator{\proj}{proj}
+
+\usepackage{mdframed}
+\newcommand
+\sol[1]{
+\medskip
+\begin{mdframed}
+\textbf{Ans:\\} #1
+\end{mdframed}
+\medskip
+}
+
+\newcommand{\vt}[2]{\left[\begin{matrix} #1 \\ #2 \end{matrix}\right]}
+\newcommand{\vd}[3]{\left[\begin{smallmatrix} #1 \\ #2 \\ #3 \end{smallmatrix}\right]}
+\newcommand{\vv}[4]{\left[\begin{smallmatrix} #1 \\ #2 \\ #3 \\ #4 \end{smallmatrix}\right]}
+
+
+
+\begin{document}
+\begin{center}
+{\Large\textbf{Math 2135 - Assignment 13}}\\
+\medskip
+Due December 9, 2024 \\ Maxwell Rodgers
+\end{center}
+\bigskip
+\thispagestyle{empty}
+
+
+\begin{enumerate} 
+\item
+\begin{enumerate}
+\item    
+ Give $3$ vectors of length $1$ in $\R^3$ that are orthogonal to $\bu = \vd{1}{-1}{2}$.
+
+\item
+ Which of the following sets are orthogonal? Orthonormal?
+% If a set is only orthogonal, normalize its vectors to get an orthonormal set. 
+ \[ A = \{ \vt{0.6}{0.8}, \vt{0.8}{-0.6} \}, \hspace{3cm} B = \{ \frac{1}{3}\vd{1}{-2}{2}, \frac{1}{\sqrt{18}} \vd{4}{1}{-1} \} \]
+\end{enumerate}
+
+\sol{\begin{enumerate}
+    \item We need to solve the equation $x-y+2z=0$ by setting each variable equal to zero in turn, we can easily find orthogonal vectors:
+  $\vd{0}{2}{1},\vd{2}{0}{-1},\vd{-2}{0}{1}$ and now we just have to normalize them: $\frac{\sqrt5}{5}\vd{0}{2}{1},\frac{\sqrt5}{5}\vd{2}{0}{-1},\frac{\sqrt5}{5}\vd{-2}{0}{1}$ 
+  \item
+  Set A is orthonormal because $\vt{0.6}{0.8} \cdot \vt{0.8}{-0.6} = 0.48-0.48 = 0$(orthogonal) and both vectors have length $\sqrt{0.36+0.64}=1$(normal).\\
+  Set B is also orthonormal because $\vd{1}{-2}{2}\cdot\vd{4}{1}{-1}=4-2-2=0$ (orthogonal). and both have length of 1. $\frac{\sqrt{1+4+4}}{3}=\frac33=1,\frac{\sqrt{16+1+1}}{\sqrt{18}}=\frac{\sqrt{18}}{\sqrt{18}}=1$
+\end{enumerate}
+}
+
+
+\item
+\begin{enumerate}
+\item    
+ Let $W$ be the subspace of $\R^3$ with orthonormal basis
+ $B = ( \frac{1}{3}\vd{2}{-1}{2}, \frac{1}{\sqrt{5}} \vd{1}{2}{0} )$.
+ Compute the coordinates $[x]_B$ for $x =\vd{7}{4}{4}$ in $W$ using dot products.
+\item
+ Give a basis for $W^\perp$.
+\item
+ Find the closest point to $y = \vd{1}{2}{3}$ in $W$. What is the distance from $y$ to $W$?
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      $[x]_B=\vt{x\cdot\bu_1}{x\cdot\bu_2}=\vt{\frac13((7)(2)+(4)(-1)+(2)(4))}{\frac{1}{\sqrt5}((7)(1)+(4)(2)+(4)(0))}
+      =\vt{6}{3\sqrt5}$
+    \item
+      Since $W$ is 2 dimensional and in $\R^3$ we know that $W^\perp$ is 1 dimensional. we can use the cross product of the basis vectors of $W$:
+      $\vd{2}{-1}{2}\times\vd120=\vd{-4}{2}{5}=$basis of $W^\perp$.
+    \item
+      We find the point at the tip of the projection of y onto W:
+      $\frac19\vd2{-1}2(\vd123\cdot\vd2{-1}2)+\frac15\vd120(\vd123\cdot\vd120)=\frac23\vd2{-1}2+\vd120=
+      \frac13\vd{7}{4}{4} = (\frac73,\frac43,\frac43)$\\
+      The distance from y to this point is $|\frac13(\vd369-\vd744)|=\frac13\sqrt{-4^2+2^2+5^2}=\sqrt5$
+  \end{enumerate}
+}
+
+\item
+ True or false. Explain your answers.
+\begin{enumerate}
+\item Every orthogonal set is also orthonormal.
+\item Not every orthonormal set in $\R^n$ is linearly independent.
+\item For each $\bx$ and each subspace $W$, the vector $\bx-\proj_W(\bx)$ is orthogonal to $W$.
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item FALSE\\
+      It is possible for vectors to be perpendicular to each other and not have magnitude of 1.
+    \item FALSE\\
+      In order to be an orthonormal set all of the vectors must be perpendicular to each other which means that they cannot be linear combinations of any of the other vectors.
+    \item TRUE\\
+      This is just the same as representing x as the sum of 2 vectors, one of them being in W, forcing the other one to be perpendicular to the first and therefore perpendicular to the whole of W.
+  \end{enumerate}
+}
+
+
+\item
+ Let $W$ be a subset of $\R^n$. Show that its orthogonal complement
+\[ W^\perp := \{ x\in\R^n \ |\ x \text{ is orthogonal to all } w\in W \} \]
+ is a subspace of $\R^n$.
+
+ \sol{
+  Take $\bu\in W\hspace{2mm}\bv,\bw\in W^\perp\hspace{2mm}c\in\R$\\
+  \begin{itemize}
+ \item Since $\bv$ and $\bu$ are in perpendicular spaces, they must be perpendicular to each other, and thus
+  $\bu\cdot\bv=0$. From the properties of dot products we can see that $\bu\cdot c\bv=c(\bu\cdot\bv)=0(c)=0$
+  The same can be said for $\bu$ and $\bw$. This means that $c\bv\in W^\perp$
+  \item We can also see then that $\bu\cdot(\bw+\bv)=\bu\cdot\bw+\bu\cdot\bv=0+0=0$ so $(\bw+\bv)\in W^\perp$
+\end{itemize}
+Thus $W^\perp$ is a subspace of $\R^n$ because all of its elements are from $\R^n$, and it is closed under addition and scalar multiplication.
+}
+
+\item
+ Let $W$ be a subspace of $\R^n$. Show that 
+\begin{enumerate}
+\item $W \cap W^\perp = 0$
+\item $\dim W + \dim W^\perp = n$  \\
+ Hint: Let $w_1,\dots, w_k$ be a basis of $W$. Use that $x\in W^\perp$ iff $x$ is orthogonal to $w_1,\dots, w_k$.
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item
+      Since all of the elements in $W^\perp$ have to be perpendicular to the elements in $W$, the only element that they could share would be an element that is perpedicular to itself.
+      This would mean that the dot product between this element and itself would have to be zero, meaning that it must be the zero vector $0$.
+    \item
+      Take an orthogonal basis of $\R^n$, $(u_1,\dots,u_n)$. This basis can be split into two parts by chosing
+      any subset and its compliment. Each of these subsets is an orthogonal basis of a subspace.
+      Additionaly, the subspaces defined by these basis would be perpendicular because every basis
+      vector in each one would be orthogonal to every basis vector in the other (because we started with an orthogonal basis).
+      Thus we get two subspaces $W$ and $W^\perp$. Since the bases of theses subspaces have a total
+      of $n$ elements between them, $\dim W +\dim W^\perp=n$.
+      
+  \end{enumerate}
+}
+
+
+
+\item
+  Find the least squares solutions of $Ax=b$.
+
+\noindent (a) $A=\begin{bmatrix} 1 & 3 \\ 1 & -1 \\ 1 & 1 \end{bmatrix}$, $b = \vd{5}{1}{0}$
+ \hspace{3cm} (b)  $A=\begin{bmatrix} 1 & 1 & 0 \\ 1 & 1 & 0  \\ 1 & 0 & 1 \\ 1 & 0 & 1 \end{bmatrix}$, $b = \vv{-1}{2}{-3}{4}$  
+
+ \sol{ 
+   From theorem 13 we know that the least squares solutions can be found by solving $A^TAx=A^Tb$
+\begin{enumerate}
+  \item
+    $A^TA=\left[\begin{matrix}1&1&1\\3&-1&1\end{matrix}\right]\left[\begin{matrix}1&3\\1&-1\\1&1\end{matrix}\right]
+    = \left[\begin{matrix}3&3\\3&11\end{matrix}\right]$\\
+    $A^Tb=\left[\begin{matrix}1&1&1\\3&-1&1\end{matrix}\right]\vd510=\vt{6}{14}$\\
+    So now we can row reduce the augmented matrix $\left[\begin{matrix}3&3&6\\3&11&14\end{matrix}\right]
+    \to \left[\begin{matrix}3&3&6\\0&8&8\end{matrix}\right]\to\left[\begin{matrix}1&0&1\\0&1&1\end{matrix}\right]$ so $x=\vt11$
+
+  \item
+  $A^TA=\left[\begin{matrix}1&1&1&1\\1&1&0&0\\0&0&1&1\end{matrix}\right]\left[\begin{matrix}1&1&0\\1&1&0\\1&0&1\\1&0&1\end{matrix}\right]=
+  \left[\begin{matrix}4&2&2\\2&2&0\\2&0&2\end{matrix}\right]$\\
+  $A^Tb=\left[\begin{matrix}1&1&1&1\\1&1&0&0\\0&0&1&1\end{matrix}\right]\vv{-1}{2}{-3}{4}=\vd211$
+  \\So now we row reduce the augmented matrix $\left[\begin{matrix}4&2&2&2\\2&2&0&1\\2&0&2&1\end{matrix}\right]\to\left[\begin{matrix}2&1&1&1\\0&1&-1&0\\0&0&0&0\end{matrix}\right]$
+  So $x=\vd{\frac12}{0}{0}+x_3\vd{-1}{1}{1}$
+\end{enumerate}
+ }
+\item
+ True or false for $A\in\R^{m\times n}$ and $b\in\R^m$. Explain your answers.
+\begin{enumerate}
+\item A least squares solution of $Ax=b$ is an $\hat{x}$ such that $A\hat{x}$ is as close as possible to $b$.
+\item A least squares solution of $Ax=b$ is an $\hat{x}$ such that $A\hat{x} = \hat{b}$ for $\hat{b}$
+  the orthogonal projection of $b$ onto $\Col A$.
+\item The point in $\Col A$ closest to $b$ is a least squares solution of $Ax=b$.  
+\item If $Ax=b$ is consistent, then every solution $x$ is a least squares solution.
+\end{enumerate}
+
+\sol{
+  \begin{enumerate}
+    \item TRUE\\
+      Least squares means that the euclidian distance between the solution's output and the desired output is minimized.
+    \item TRUE\\
+      Since a) is true this is also true because $\hat{b}$ is the closest possible solution to $b$.
+    \item TRUE\\
+      See two explanations above.
+    \item TRUE\\
+      The difference can't be less than 0 so I guess this is true.
+  \end{enumerate}
+}
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
